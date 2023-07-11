@@ -7,13 +7,15 @@ use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
+    //Get all clients
     public function index()
     {
         $clients = Client::all();
 
         return response()->json($clients);
     }
-    
+
+    // Create a new client 
     public function store(Request $request)
     {
         // Validate the request data
@@ -25,7 +27,7 @@ class ClientController extends Controller
             'country' => 'required',
         ]);
 
-        // Create a new client instance with the validated data
+        //Validated data
         $client = Client::create($validatedData);
 
         // Return a response indicating success
@@ -33,5 +35,16 @@ class ClientController extends Controller
             'message' => 'Client created successfully',
             'client' => $client,
         ], 201);
+    }
+
+    //Delete a client by id
+    public function destroy($id)
+    {
+        $client = Client::findOrFail($id);
+        $client->delete();
+
+        return response()->json([
+            'message' => 'Client deleted successfully',
+        ], 200);
     }
 }

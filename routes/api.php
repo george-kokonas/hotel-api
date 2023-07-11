@@ -10,3 +10,4 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get('/clients', [ClientController::class, 'index']);
 Route::post('/clients/create', [ClientController::class, 'store']);
+Route::delete('/clients/delete/{id}', [ClientController::class, 'destroy']);
