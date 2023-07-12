@@ -8,15 +8,15 @@ use Illuminate\Http\Request;
 class ClientController extends Controller
 {
     //Get all clients
-    public function index()
+    public function getClients()
     {
         $clients = Client::all();
 
-        return response()->json($clients);
+        return response()->json($clients,200);
     }
 
     // Create a new client 
-    public function store(Request $request)
+    public function createClient(Request $request)
     {
         // Validate the request data
         $validatedData = $request->validate([
@@ -38,7 +38,7 @@ class ClientController extends Controller
     }
 
     //Delete a client by id
-    public function destroy($id)
+    public function deleteClient($id)
     {
         $client = Client::findOrFail($id);
         $client->delete();
